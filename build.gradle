@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'eclipse'
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    serenityVersion = '4.1.15'
+    cucumberVersion = '7.14.0'
+    junitVersion    = '4.13.2'
+}
+
+dependencies {
+    // Serenity BDD core + Screenplay
+    testImplementation "net.serenity-bdd:serenity-core:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-junit:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-cucumber:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-screenplay:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-screenplay-webdriver:${serenityVersion}"
+
+    // JUnit 4
+    testImplementation "junit:junit:${junitVersion}"
+
+    // Selenium (opcional, Serenity ya trae su versión)
+    testImplementation "org.seleniumhq.selenium:selenium-java:4.16.1"
+
+    // SLF4J binding para limpiar warnings
+    testImplementation "org.slf4j:slf4j-simple:2.0.16"
+}
+
+test {
+    // Para ejecutar con JUnit 4 runner
+    useJUnit()
+    systemProperty "webdriver.edge.driver", "C:/drivers/msedgedriver.exe"
+}
+
